@@ -6,54 +6,20 @@ import (
 
 func main() {
 	holaGo()
-	fmt.Println(devolverTexto())
-	var numero1 float32 = 3.5
-	var numero2 float32 = 4.2
-	calculadora(numero1, numero2)
+	fmt.Print("Pedido 1 --> ")
+	fmt.Println(gorras(8, "CLP"))
+	fmt.Print("Pedido 2 --> ")
+	fmt.Println(gorras(5, "CLP"))
+}
+
+func gorras(pedido float32, moneda string) (string, float32, string) {
+	precio := func() float32 {
+		return pedido * 7
+	}
+	// precio pasa a ser una funcion
+	return "El precio de gorras pedidas es:", precio(), moneda
 }
 
 func holaGo() {
 	fmt.Println("Hola desde GO!")
-}
-
-func devolverTexto() (dato1 string, dato2 int) {
-	dato1 = "Neysa"
-	dato2 = 25
-	return
-}
-
-func operacion(n1 float32, n2 float32, op string) float32 {
-	var resultado float32
-	switch op {
-	case "+":
-		resultado = n1 + n2
-		break
-	case "-":
-		resultado = n1 - n2
-		break
-	case "*":
-		resultado = n1 * n2
-		break
-	case "/":
-		resultado = n1 / n2
-		break
-	default:
-		resultado = 0
-		break
-	}
-	return resultado
-}
-
-func calculadora(numero1 float32, numero2 float32) {
-	fmt.Print("La suma es: ")
-	fmt.Println(operacion(numero1, numero2, "+"))
-
-	fmt.Print("La resta es: ")
-	fmt.Println(operacion(numero1, numero2, "-"))
-
-	fmt.Print("La multiplicación es: ")
-	fmt.Println(operacion(numero1, numero2, "*"))
-
-	fmt.Print("La división es: ")
-	fmt.Println(operacion(numero1, numero2, "/"))
 }
