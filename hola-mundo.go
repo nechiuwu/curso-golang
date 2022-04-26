@@ -6,18 +6,13 @@ import (
 
 func main() {
 	holaGo()
-	fmt.Print("Pedido 1 --> ")
-	fmt.Println(gorras(8, "CLP"))
-	fmt.Print("Pedido 2 --> ")
-	fmt.Println(gorras(5, "CLP"))
+	pantalon("rojo", "largo", "jeans")
 }
 
-func gorras(pedido float32, moneda string) (string, float32, string) {
-	precio := func() float32 {
-		return pedido * 7
+func pantalon(attrs ...string) {
+	for _, attr := range attrs {
+		fmt.Println(attr)
 	}
-	// precio pasa a ser una funcion
-	return "El precio de gorras pedidas es:", precio(), moneda
 }
 
 func holaGo() {
