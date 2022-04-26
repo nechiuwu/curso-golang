@@ -4,7 +4,14 @@ import (
 	"fmt"
 )
 
+type Gorra struct {
+	marca  string
+	color  string
+	plana  bool
+	precio float32
+}
+
 func main() {
-	// time.Sleep(time.Second * 2)
-	fmt.Println("hola desde go :3")
+	var jockey = Gorra{"nike", "verde", true, 20.5}
+	fmt.Println(jockey)
 }
