@@ -6,6 +6,7 @@ import (
 
 func main() {
 	holaGo()
+	fmt.Println(devolverTexto())
 	var numero1 float32 = 3.5
 	var numero2 float32 = 4.2
 	calculadora(numero1, numero2)
@@ -13,6 +14,12 @@ func main() {
 
 func holaGo() {
 	fmt.Println("Hola desde GO!")
+}
+
+func devolverTexto() (dato1 string, dato2 int) {
+	dato1 = "Neysa"
+	dato2 = 25
+	return
 }
 
 func operacion(n1 float32, n2 float32, op string) float32 {
