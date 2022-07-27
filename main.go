@@ -15,6 +15,4 @@ func main() {
 	// crea un server
 	server := http.ListenAndServe(":8080", nil)
 	log.Fatal(server)
-
-	fmt.Println("El server está corriendo en el puerto :8080")
 }
