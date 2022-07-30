@@ -6,6 +6,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var routes = Routes{
+	Route{"Index", "GET", "/", Index},
+	Route{"Contact", "GET", "/contacto", Contact},
+	Route{"ListMovies", "GET", "/peliculas", ListMovies},
+	Route{"ShowMovie", "GET", "/peliculas/{id}", ShowMovie},
+	Route{"AddMovie", "POST", "/peliculas/add", MovieAdd},
+}
+
 type Route struct {
 	Name       string
 	Method     string
@@ -25,11 +33,4 @@ func NewRouter() *mux.Router {
 			HandlerFunc(route.HandleFunc)
 	}
 	return r
-}
-
-var routes = Routes{
-	Route{"Index", "GET", "/", Index},
-	Route{"Contact", "GET", "/contacto", Contact},
-	Route{"ListMovies", "GET", "/peliculas", ListMovies},
-	Route{"ShowMovie", "GET", "/peliculas/{id}", ShowMovie},
 }
