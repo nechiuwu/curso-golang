@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,13 +14,8 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", Index)
 	router.HandleFunc("/contacto", Contact)
-
-	/*
-		// crea endpoint y que hará cuando sea invocado
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprintf(w, "devuelve texto")
-		})
-	*/
+	router.HandleFunc("/peliculas", ListMovies)
+	router.HandleFunc("/peliculas/{id}", ShowMovie)
 
 	// crea un server y recibe router
 	server := http.ListenAndServe(":8080", router)
@@ -32,4 +28,19 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func Contact(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hola, contactame")
+}
+
+func ListMovies(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Listado de peliculas")
+	movies := Movies{
+		Movie{"Titanic", 1997, "Spielberg"},
+		Movie{"Jurassic Park", 1999, "Spielberg"},
+	}
+	json.NewEncoder(w).Encode(movies)
+}
+
+func ShowMovie(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	movieId := params["id"]
+	fmt.Fprintf(w, "Has cargado la pelicula %s", movieId)
 }
