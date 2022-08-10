@@ -41,7 +41,7 @@ func connectMongoDb() {
 
 func createMovie(movie *MovieDb, client *mongo.Client, ctx context.Context) {
 	collection := client.Database("movie").Collection("movies")
-	res, err := collection.InsertOne(ctx, bson.D{{"name", movie.Name}, {"ano", movie.Ano}, {"director", movie.Director}})
+	res, err := collection.InsertOne(ctx, bson.D{{Key: "name", Value: movie.Name}, {Key: "ano", Value: movie.Ano}, {Key: "director", Value: movie.Director}})
 	if err == nil {
 		panic(err)
 	}
