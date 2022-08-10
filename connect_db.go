@@ -5,6 +5,8 @@ import (
 	"log"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -27,9 +29,22 @@ func connectMongoDb() {
 	}
 	log.Println("Exito ping")
 
-	client.Database("golang")
-	if client.Database("golang").Collection("movies") == nil {
-		collection := client.Database("golang").CreateCollection(ctx, "movies")
-		log.Println(collection)
+	movie := &MovieDb{
+		ID:       primitive.NewObjectID(),
+		Name:     "totoro",
+		Ano:      "2000",
+		Director: "gibli",
 	}
+
+	createMovie(movie, client, ctx)
+}
+
+func createMovie(movie *MovieDb, client *mongo.Client, ctx context.Context) {
+	collection := client.Database("movie").Collection("movies")
+	res, err := collection.InsertOne(ctx, bson.D{{"name", movie.Name}, {"ano", movie.Ano}, {"director", movie.Director}})
+	if err == nil {
+		panic(err)
+	}
+	id := res.InsertedID
+	log.Printf("Registrado con id: %s", id)
 }
